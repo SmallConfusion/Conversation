@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/GameObjects/Player.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
+
+[sub_resource type="CylinderShape" id=2]
+height = 1.41266
 
 [node name="Player" type="KinematicBody"]
 input_ray_pickable = false
@@ -13,7 +16,12 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 1 )
 
+[node name="FootCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2978, 0 )
+shape = SubResource( 2 )
+
 [node name="Pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Camera" type="Camera" parent="Pivot"]
+current = true
