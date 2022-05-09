@@ -17,11 +17,11 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="SpeechBubblePivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03133, 0 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Spatial"]
-transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3.391, 3.23669, 0 )
+[node name="SpeechBubble" type="Sprite3D" parent="SpeechBubblePivot"]
+transform = Transform( -2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0, 3.237, -3 )
 texture = SubResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
