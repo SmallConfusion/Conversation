@@ -1,7 +1,5 @@
 extends KinematicBody
 
-onready var camera = $Camera
-
 var gravity := -30.0
 var friction := 0.9
 var speed := 8.0
