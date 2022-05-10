@@ -92,7 +92,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03133, 0 )
 [node name="SpeechBubble" type="Sprite3D" parent="SpeechBubblePivot"]
 transform = Transform( -2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0, 3.237, -3 )
 modulate = Color( 1, 1, 1, 0.964444 )
-billboard = 1
 texture = SubResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
