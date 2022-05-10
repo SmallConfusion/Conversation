@@ -26,7 +26,7 @@ func _process(delta):
 func talk(text):
 	talk_string = text
 	talk_position = 0
-	still_talking = true
+	speech_bubble.set_text("")
 	animation_player.play("FadeInBubble")
 
 
@@ -52,3 +52,5 @@ func rotate_bubble():
 	speech_bubble_pivot.rotate(Vector3.UP, rotation_difference)
 	
 	
+func start_talking():
+	still_talking = true

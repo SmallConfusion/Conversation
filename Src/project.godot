@@ -14,6 +14,10 @@ config/name="Add to Conversation"
 run/main_scene="res://Scenes/Screens/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Conversations="*res://Scripts/Conversations.gd"
+
 [input]
 
 Forward={
