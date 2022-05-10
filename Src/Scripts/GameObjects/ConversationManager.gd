@@ -27,6 +27,8 @@ func converse():
 		var line = Conversations.conversations[conversation][position]
 		people[talker].talk(line)
 		
+		yield(people[talker], "finished_talking")
+		
 		
 		# Increase position
 		position += 1
@@ -40,6 +42,8 @@ func converse():
 			conversation = new_conversation
 			
 			position = 0
+			
+			# Adds two second wait between conversations
+			yield(get_tree().create_timer(2), "timeout")
 		
 		
-		yield(people[talker], "finished_talking")
