@@ -11,3 +11,4 @@ ambient_light_sky_contribution = 0.19
 tonemap_mode = 4
 tonemap_exposure = 0.93
 tonemap_white = 9.09
+auto_exposure_enabled = true
