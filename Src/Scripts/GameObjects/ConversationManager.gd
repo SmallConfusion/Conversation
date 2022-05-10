@@ -38,6 +38,8 @@ func converse():
 				new_conversation += 1
 			
 			conversation = new_conversation
+			
+			position = 0
 		
 		
 		yield(people[talker], "finished_talking")
