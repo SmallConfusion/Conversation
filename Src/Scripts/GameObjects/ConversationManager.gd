@@ -5,7 +5,7 @@ var people := []
 var talker := 0
 
 var position := 0
-var conversation := 0
+var conversation := floor(rand_range(0, len(Conversations.conversations)))
 
 func _ready():
 	people = get_children()
