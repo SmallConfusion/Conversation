@@ -15,10 +15,8 @@ var still_talking := false
 onready var player := get_node("../Player")
 onready var speech_bubble_pivot := get_node("SpeechBubblePivot")
 onready var speech_bubble := get_node("Viewport/SpeechBubble")
+onready var animation_player := get_node("AnimationPlayer")
 
-
-func _ready():
-	talk("Hello, world!")
 
 
 func _process(delta):
@@ -30,7 +28,7 @@ func talk(text):
 	talk_string = text
 	talk_position = 0
 	still_talking = true
-
+	animation_player.play("FadeInBubble")
 
 func update_talk(delta):
 	if still_talking:
@@ -41,6 +39,7 @@ func update_talk(delta):
 		if character_number >= talk_string.length():
 			still_talking = false
 			emit_signal("finished_talking")
+			animation_player.play("FadeOutBubble")
 
 
 func rotate_bubble():
