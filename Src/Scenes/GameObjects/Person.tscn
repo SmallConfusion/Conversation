@@ -23,6 +23,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpeechBubblePivot/SpeechBubble:opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "FadeOutBubble"
@@ -35,7 +47,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 0 ),
 "update": 1,
 "values": [ false ]
 }
@@ -66,6 +78,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03133, 0 )
 [node name="SpeechBubble" type="Sprite3D" parent="SpeechBubblePivot"]
 transform = Transform( -2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0, 3.237, -3 )
 visible = false
+modulate = Color( 1, 1, 1, 0.964444 )
+opacity = 0.222222
+billboard = 1
 texture = SubResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]

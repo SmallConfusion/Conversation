@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Maps/Test.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/GameObjects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/GameObjects/Person.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/GameObjects/ConversationManager.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Spatial"]
 
@@ -11,5 +12,10 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="Person" parent="." instance=ExtResource( 3 )]
+[node name="Node" parent="." instance=ExtResource( 4 )]
+
+[node name="Person" parent="Node" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6323, 3.09944e-05, 1.5302 )
+
+[node name="Person2" parent="Node" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.9904, 0, -3.37982 )

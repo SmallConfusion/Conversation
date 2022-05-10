@@ -6,17 +6,16 @@ extends Spatial
 signal finished_talking
 
 export var rotation_speed := 2.0
-export var talk_speed := 0.01
+export var talk_speed := 0.05
 
 var talk_string := ""
 var talk_position := 0.0
 var still_talking := false
 
-onready var player := get_node("../Player")
+onready var player := get_node("../../Player")
 onready var speech_bubble_pivot := get_node("SpeechBubblePivot")
 onready var speech_bubble := get_node("Viewport/SpeechBubble")
 onready var animation_player := get_node("AnimationPlayer")
-
 
 
 func _process(delta):
@@ -29,6 +28,7 @@ func talk(text):
 	talk_position = 0
 	still_talking = true
 	animation_player.play("FadeInBubble")
+
 
 func update_talk(delta):
 	if still_talking:
