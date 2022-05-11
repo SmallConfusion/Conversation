@@ -15,18 +15,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _physics_process(delta):
-	# Move
-	velocity.x *= friction
-	velocity.z *= friction
-	velocity.y += gravity * delta
-	
-	var desired_velocity = get_input() * speed
-	
-	velocity.x = desired_velocity.x
-	velocity.z = desired_velocity.z
-	velocity = move_and_slide(velocity, Vector3.UP, true)
-	
+func _process(delta):
 	# Get interruptable conversations
 	var interruptable_conversations := []
 	
@@ -49,6 +38,19 @@ func _physics_process(delta):
 					min_length_conversation = conversation
 			
 			min_length_conversation.interrupt()
+
+
+func _physics_process(delta):
+	# Move
+	velocity.x *= friction
+	velocity.z *= friction
+	velocity.y += gravity * delta
+	
+	var desired_velocity = get_input() * speed
+	
+	velocity.x = desired_velocity.x
+	velocity.z = desired_velocity.z
+	velocity = move_and_slide(velocity, Vector3.UP, true)
 
 
 func _input(event):
