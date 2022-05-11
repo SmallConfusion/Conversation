@@ -33,6 +33,34 @@ var conversations = [
 		"No it's white for sure. They vented."
 	],
 	[
+		"Dude, NFTs are the next big thing. Do you see these people buying pictures for millions of dollars?",
+		"It's insane. They have got to be massively overvalued, though, right?",
+		"No, these jpegs are worth the millions of dollars people are paying. Plus, they're an investment!",
+		"Is it a good investment though?",
+		"Yes! There is nothing smarter to invest your money in right now.",
+		"Wow! How much money have you made on them?",
+		"Uhhh... Well... I haven't made any money yet, but that's only because I've invested in a lot of the smaller NFTs. If I would have bought the big ones, I would have made so much money.",
+		"Sure you would have."
+	],
+	[
+		"Fly me to the moon, and let me play Among Us"
+	],
+	[
+		"...",
+		"...",
+		"...",
+		"...",
+		"...",
+		"...",
+		"...",
+		"...",
+		"Well, this is awkward.",
+		"...",
+		"...",
+		"...",
+		"...",
+	],
+	[
 		"We're no strangers to love",
 		"You know the rules and so do I",
 		"A full commitment's what I'm thinking of",
@@ -63,5 +91,68 @@ var conversations = [
 		"Never gonna make you cry",
 		"Never gonna say goodbye",
 		"Never gonna tell a lie and hurt you"
-	]
+	],
+	[
+		"Fried chicken is my favorite food. I ate so much, now I feel sick.",
+		"Try eating some edible chalk. It helps with your stomach. Here, have some!",
+		"BLEEAAAAAAHHH, that's horrible! I feel even worse now.",
+		"Here have some magic healing crystals.",
+		"No.",
+		"Yes, have some!",
+		"Ok I'll try some."
+	],
+	[
+		"Here, have a cheese stick. It's reall good.",
+		"Wow, thanks! I love cheese sticks.",
+		"I know, right! They're so fun to string.",
+		"I perfer to bite them instead of string them.",
+		"Sorry, but you're wrong.",
+		"No, you're wrong. Stringing is way better.",
+		"Yeah, no cheese sticks were meant to be bitten. That's why they're called \"STICKS\""
+	],
+	[
+		"Water is my favorite drink. I drink like three gallons a day!",
+		"Those are rookie numbers. I drink nine gallons a day.",
+		"No, you can't drink that much, it's not healthy!",
+		"NO, yOU cAn't drInk thAt mUch, It's nOt hEALthy! Go drink a coke.",
+	],
 ]
+
+
+func _ready():
+	# Add wednesday easter egg
+	var day_of_week = OS.get_datetime()["weekday"]
+	
+	match day_of_week:
+		0:
+			day_of_week = "Sunday"
+		1:
+			day_of_week = "Monday"
+		2:
+			day_of_week = "Tuesday"
+		3:
+			day_of_week = "Wednesday"
+		4:
+			day_of_week = "Thursday"
+		5:
+			day_of_week = "Friday"
+		6:
+			day_of_week = "Saturday"
+	
+	if day_of_week == "Wednesday":
+		conversations.append([
+			"Hey, what day is it?",
+			"It is Wednesday my dudes.",
+			"It is Wednesday my dudes.",
+			"It is Wednesday my dudes.",
+			"It is Wednesday my dudes.",
+			"It is Wednesday my dudes.",
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+		])
+	else:
+		conversations.append([
+			"Hey, what day is it?",
+			"It's " + day_of_week,
+			"Oh, thanks!",
+			"No problem, bro."
+		])

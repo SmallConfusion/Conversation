@@ -5,9 +5,11 @@ var people := []
 var talker := 0
 
 var position := 0
-var conversation := floor(rand_range(0, len(Conversations.conversations)))
+var conversation := 0
 
 func _ready():
+	randomize()
+	conversation = floor(rand_range(0, len(Conversations.conversations)))
 	people = get_children()
 	converse()
 
@@ -44,6 +46,6 @@ func converse():
 			position = 0
 			
 			# Adds two second wait between conversations
-			yield(get_tree().create_timer(2), "timeout")
+			yield(get_tree().create_timer(5), "timeout")
 		
 		
