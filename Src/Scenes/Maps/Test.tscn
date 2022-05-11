@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Models/Maps/Test.fbx" type="PackedScene" id=1]
-[ext_resource path="res://Materials/Test.tres" type="Material" id=2]
+[ext_resource path="res://Models/HouseParts/Test.tres" type="Material" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
