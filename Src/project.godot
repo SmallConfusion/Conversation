@@ -19,6 +19,11 @@ config/icon="res://icon.png"
 Conversations="*res://Scripts/Autoload/Conversations.gd"
 Global="*res://Scripts/Autoload/Global.gd"
 
+[gui]
+
+theme/custom="res://default_theme.tres"
+theme/custom_font="res://Fonts/LiberationSansUI.tres"
+
 [input]
 
 Forward={

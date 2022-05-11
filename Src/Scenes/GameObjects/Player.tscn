@@ -49,12 +49,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = -64.0
+margin_top = -89.0
 margin_right = 1.0
-margin_bottom = -24.0
+margin_bottom = 8.0
 text = "Press space to interrupt"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
