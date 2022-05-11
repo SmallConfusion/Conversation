@@ -150,6 +150,17 @@ var conversations = [
 		"Well, that's a bummer! There goes your summer vacation!",
 		"Yeah!!! That's what makes me so mad!!! I'm going home! I can't afford to go anywhere else!",
 		"You certainly can't! Bye!",
+	],
+	[
+		"Hi y'all!",
+		"Hi! Hey there!",
+		"Where are you off to with that chainsaw?",
+		"I'm going to the Ramsey farm. They had some big trees go down in the storm yesterday.",
+		"Oh! I didn't hear that!",
+		"Are either of you free for a few hours today? They can use a few strong men.",
+		"I'm free. I have a chainsaw too. I'll head over after I go home and grab some equipment!",
+		"I'll load up my tractor with some chains, and I'll be over!",
+		"That will be great! They're going to appreciate the help!",
 	]
 ]
 
