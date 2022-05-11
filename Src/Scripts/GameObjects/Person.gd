@@ -26,6 +26,7 @@ func _process(delta):
 		update_talk(delta)
 	else:
 		$"SpeechBubblePivot/SpeechBubble".visible = false
+		rotate_self()
 
 func talk(text):
 	talk_string = text
@@ -56,6 +57,18 @@ func rotate_bubble():
 	speech_bubble_pivot.rotate(Vector3.UP, rotation_difference)
 
 
+func rotate_self():
+	$"SpeechBubblePivot/SpeechBubble".visible = false
+	
+	var player_position := Vector2(player.global_transform.origin.x, player.global_transform.origin.z)
+	var pivot_position := Vector2(global_transform.origin.x, global_transform.origin.z)
+	
+	var target_rotation := -(pivot_position - player_position).angle()
+	var rotation_difference = target_rotation - global_transform.basis.get_euler().y + PI
+	
+	rotate(Vector3.UP, rotation_difference)
+
+
 func start_talking():
 	still_talking = true
 
@@ -63,4 +76,3 @@ func start_talking():
 func interrupt():
 	interrupted = true
 	still_talking = false
-	$"SpeechBubblePivot/SpeechBubble".visible = false
