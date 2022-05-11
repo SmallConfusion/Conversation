@@ -11,17 +11,21 @@ export var talk_speed := 0.05
 var talk_string := ""
 var talk_position := 0.0
 var still_talking := false
+var interrupted := false
 
 onready var player := get_node("../../Player")
 onready var speech_bubble_pivot := get_node("SpeechBubblePivot")
 onready var speech_bubble := get_node("Viewport/SpeechBubble")
 onready var animation_player := get_node("AnimationPlayer")
+onready var tween := get_node("Tween")
 
 
 func _process(delta):
-	rotate_bubble()
-	update_talk(delta)
-
+	if not interrupted:
+		rotate_bubble()
+		update_talk(delta)
+	else:
+		$"SpeechBubblePivot/SpeechBubble".visible = false
 
 func talk(text):
 	talk_string = text
@@ -50,7 +54,13 @@ func rotate_bubble():
 	var rotation_difference = target_rotation - speech_bubble_pivot.global_transform.basis.get_euler().y
 	
 	speech_bubble_pivot.rotate(Vector3.UP, rotation_difference)
-	
-	
+
+
 func start_talking():
 	still_talking = true
+
+
+func interrupt():
+	interrupted = true
+	still_talking = false
+	$"SpeechBubblePivot/SpeechBubble".visible = false

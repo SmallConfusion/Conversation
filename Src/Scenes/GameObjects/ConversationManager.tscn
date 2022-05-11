@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/GameObjects/ConversationManager.gd" type="Script" id=1]
 
-[node name="ConversationManager" type="Node"]
+[sub_resource type="SphereShape" id=1]
+radius = 8.0
+
+[node name="ConversationManager" type="Area" groups=["ConversationArea"]]
 script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

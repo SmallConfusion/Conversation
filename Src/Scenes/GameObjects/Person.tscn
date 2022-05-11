@@ -78,7 +78,7 @@ tracks/1/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[node name="Person" type="Spatial"]
+[node name="Person" type="Spatial" groups=["Person"]]
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -93,6 +93,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03133, 0 )
 transform = Transform( -2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0, 3.237, -3 )
 visible = false
 modulate = Color( 1, 1, 1, 0.964444 )
+opacity = 0.0
 texture = SubResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
