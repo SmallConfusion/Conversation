@@ -12,6 +12,7 @@ func _ready():
 	map_generator.connect("map_generated", self, "map_generated")
 
 func map_generated():
+	# TODO: This doesn't work because the converstation areas aren't children of this node anymore
 	for child in get_children():
 		if child.is_in_group("ConversationArea"):
 			conversation_managers.append(child)

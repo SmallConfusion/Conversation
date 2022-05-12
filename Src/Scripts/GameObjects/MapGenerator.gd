@@ -46,6 +46,7 @@ func generate_map():
 	emit_signal("map_generated")
 
 func generate_map_array():
+	# TODO: Will generate doors off the array
 	randomize()
 	
 	# Generates empty map
