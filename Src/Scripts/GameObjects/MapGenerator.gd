@@ -18,9 +18,15 @@ export (PackedScene) var wall_scene
 export (PackedScene) var doorframe_scene
 export (PackedScene) var floor_ceiling_scene
 
+var player_spawn_position = null
+var player_spawn_rotation = null
+
+onready var game_manager := get_node("../")
+
 
 func _ready():
 	generate_map()
+	game_manager.set_player(player_spawn_position, player_spawn_rotation)
 
 
 func generate_map():
@@ -121,6 +127,22 @@ func generate_room(exits, x, y):
 	var base_x = x * room_size * wall_width
 	var base_y = y * room_size * wall_width
 	
+	if not player_spawn_position:
+		player_spawn_position = Vector3(
+			base_x + room_size / 2 * wall_width,
+			0,
+			base_y + room_size / 2 * wall_width
+		)
+		
+		if exits % 2 == 0:
+			player_spawn_rotation = 90
+		elif exits % 3 == 0:
+			player_spawn_rotation = 180
+		elif exits % 5 == 0:
+			player_spawn_rotation = 270
+		elif exits % 7 == 0:
+			player_spawn_rotation = 0
+	
 	# generate floors and ceilings
 	for i in room_size:
 		for j in room_size:
@@ -139,6 +161,7 @@ func generate_room(exits, x, y):
 					exits % 5 == 0, 
 					exits % 7 == 0]
 	
+	
 	for i in room_size:
 		var to_place = wall_scene
 		
@@ -147,6 +170,7 @@ func generate_room(exits, x, y):
 		# A doorframe at that position
 		if door_sides[2] and i == floor((room_size-1)/2):
 			to_place = doorframe_scene
+			
 		else:
 			to_place = wall_scene 
 		

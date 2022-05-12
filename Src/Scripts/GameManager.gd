@@ -3,6 +3,7 @@ extends Spatial
 var conversation_managers := []
 
 onready var win_screen := get_node("CanvasLayer/WinScreen")
+onready var player := get_node("Player")
 
 
 func _ready():
@@ -21,6 +22,12 @@ func _process(delta):
 	
 	if are_all_interrupted:
 		win()
+
+
+func set_player(pos, rot):
+	# Has to use this because onready vars aren't loaded yet
+	$Player.translation = pos
+	$Player.rotation_degrees.y = rot
 
 
 func win():
