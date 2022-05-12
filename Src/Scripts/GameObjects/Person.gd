@@ -13,11 +13,10 @@ var talk_position := 0.0
 var still_talking := false
 var interrupted := false
 
-onready var player := get_node("../../Player")
+onready var player := get_node("../../../Player")
 onready var speech_bubble_pivot := get_node("SpeechBubblePivot")
 onready var speech_bubble := get_node("Viewport/SpeechBubble")
 onready var animation_player := get_node("AnimationPlayer")
-onready var tween := get_node("Tween")
 
 
 func _process(delta):

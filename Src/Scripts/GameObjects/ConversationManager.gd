@@ -13,7 +13,8 @@ func _ready():
 	randomize()
 # warning-ignore:narrowing_conversion
 	conversation = floor(rand_range(0, len(Conversations.conversations)))
-	
+
+func start_conversation():
 	for potential_person in get_children():
 		if potential_person.is_in_group("Person"):
 			people.append(potential_person)

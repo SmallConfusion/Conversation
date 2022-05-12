@@ -13,14 +13,23 @@ extends Spatial
 # Let's see if I can pull this off.
 # Update it's working so far
 
+signal map_generated
 
 export (PackedScene) var wall_scene
 export (PackedScene) var doorframe_scene
 export (PackedScene) var floor_ceiling_scene
 export (PackedScene) var ceiling_light_scene
 
+export (PackedScene) var conversation_manager_scene
+export (PackedScene) var person_scene
+
 var player_spawn_position = null
 var player_spawn_rotation = null
+
+var room_size := 5
+var wall_width := 2.0
+
+var room_group_ratio := 0.6
 
 onready var game_manager := get_node("../")
 
@@ -32,9 +41,9 @@ func _ready():
 
 func generate_map():
 	var map = generate_map_array()
-	print_map(map)
 	place_map(map)
-
+	place_people(map)
+	emit_signal("map_generated")
 
 func generate_map_array():
 	randomize()
@@ -123,21 +132,16 @@ func place_map(map):
 
 
 func generate_room(exits, x, y):
-	var room_size = 3
-	var wall_width = 2
-	
 	var base_x = x * room_size * wall_width
 	var base_y = y * room_size * wall_width
 	
-	var center_of_room = Vector2(
-		base_x + room_size / 2 * wall_width,
-		base_y + room_size / 2 * wall_width
-	)
+	var center_of_room = get_room_center(x, y)
 	
-	place(ceiling_light_scene, center_of_room.x, center_of_room.y)
+	place(ceiling_light_scene, center_of_room[0], center_of_room[1])
 	
+	# Set spawn position if needed
 	if not player_spawn_position:
-		player_spawn_position = Vector3(center_of_room.x, 0, center_of_room.y)
+		player_spawn_position = Vector3(center_of_room[0], 0, center_of_room[1])
 		
 		if exits % 2 == 0:
 			player_spawn_rotation = 90
@@ -148,7 +152,7 @@ func generate_room(exits, x, y):
 		elif exits % 7 == 0:
 			player_spawn_rotation = 0
 	
-	# generate floors and ceilings
+	# Place floors
 	for i in room_size:
 		for j in room_size:
 			var xpos = wall_width * i + base_x
@@ -156,8 +160,8 @@ func generate_room(exits, x, y):
 			
 			place(floor_ceiling_scene, xpos, ypos)
 	
-	# Generate walls and doorframes around the perimeter
 	
+	# Generate walls and doorframes around the perimeter
 	# I'm almost 100% sure that the orientations of these walls are messed up in some way
 	
 	# Front, right, back, left
@@ -205,12 +209,69 @@ func generate_room(exits, x, y):
 
 		place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270)
 
+
+func place_people(map):
+	var rooms := []
+	
+	for i in len(map):
+		var row = map[i]
+		
+		for j in len(row):
+			var cell = row[j]
+			
+			if cell > 1:
+				rooms.append([i, j])
+	
+	var num_groups := len(rooms) * room_group_ratio
+	
+	rooms.shuffle()
+	
+	for i in num_groups:
+		var room = rooms[i]
+		var center = get_room_center(room[0], room[1])
+		
+		var conversation_manager = conversation_manager_scene.instance()
+		
+		conversation_manager.translation = Vector3(center[0], 0, center[1])
+		conversation_manager.rotation.y = randf() * PI * 2
+		
+		connect("map_generated", conversation_manager, "start_conversation")
+		
+		var min_place_radius = 1.5
+		var max_place_radius = 2.5
+		
+		var other_rotation_variance = 0.1
+		var local_rotation_variance = 0.1
+		
+		var people_to_generate = floor(rand_range(2, 6))
+		
+		for j in people_to_generate:
+			var person = person_scene.instance()
+			
+			var person_position = Vector2.UP * rand_range(min_place_radius, max_place_radius)
+			person_position = person_position.rotated(j * (PI*2/people_to_generate) + rand_range(-other_rotation_variance, other_rotation_variance))
+			
+			person.translation = Vector3(person_position.x, 0, person_position.y)
+			
+			# I have no idea why this works
+			person.rotation.y = PI - person_position.angle() + rand_range(-local_rotation_variance, local_rotation_variance)
+			
+			conversation_manager.add_child(person)
+		
+		add_child(conversation_manager)
+
+func get_room_center(x, y):
+	return [x * room_size * wall_width + room_size / 2 * wall_width,
+			y * room_size * wall_width + room_size / 2 * wall_width]
+
+
 func place(to_place, x, y, r = 0):
 	var place = to_place.instance()
 	place.translation = Vector3(x, 0, y)
 	place.rotation_degrees.y = r
 	add_child(place)
-	
+	return place
+
 
 func print_map(map):
 	for row in map:

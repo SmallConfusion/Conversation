@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/GameObjects/ConversationManager.gd" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=1]
-radius = 8.0
+radius = 2.5
 
 [node name="ConversationManager" type="Area" groups=["ConversationArea"]]
 script = ExtResource( 1 )
