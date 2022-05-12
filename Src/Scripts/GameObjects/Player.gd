@@ -2,7 +2,7 @@ extends KinematicBody
 
 var gravity := -30.0
 var friction := 0.9
-var speed := 8.0
+var speed := 5.0
 var mouse_sensitivity := 0.002
 
 var velocity = Vector3()
@@ -10,6 +10,7 @@ var velocity = Vector3()
 onready var camera_pivot := get_node("Pivot")
 onready var conversation_area := get_node("ConversationArea")
 onready var interrupt_hint := get_node("CanvasLayer/Control/InterruptHint")
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

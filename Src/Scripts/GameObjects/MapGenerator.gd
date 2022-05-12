@@ -17,6 +17,7 @@ extends Spatial
 export (PackedScene) var wall_scene
 export (PackedScene) var doorframe_scene
 export (PackedScene) var floor_ceiling_scene
+export (PackedScene) var ceiling_light_scene
 
 var player_spawn_position = null
 var player_spawn_rotation = null
@@ -59,6 +60,7 @@ func generate_map_array():
 	
 	
 	for i in steps:
+# warning-ignore:narrowing_conversion
 		direction = floor(rand_range(0, 4))
 		
 		# Give my position an exit in the direction I'm facing
@@ -127,12 +129,15 @@ func generate_room(exits, x, y):
 	var base_x = x * room_size * wall_width
 	var base_y = y * room_size * wall_width
 	
+	var center_of_room = Vector2(
+		base_x + room_size / 2 * wall_width,
+		base_y + room_size / 2 * wall_width
+	)
+	
+	place(ceiling_light_scene, center_of_room.x, center_of_room.y)
+	
 	if not player_spawn_position:
-		player_spawn_position = Vector3(
-			base_x + room_size / 2 * wall_width,
-			0,
-			base_y + room_size / 2 * wall_width
-		)
+		player_spawn_position = Vector3(center_of_room.x, 0, center_of_room.y)
 		
 		if exits % 2 == 0:
 			player_spawn_rotation = 90
