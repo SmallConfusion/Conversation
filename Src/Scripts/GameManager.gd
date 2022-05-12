@@ -26,16 +26,13 @@ func _process(delta):
 			if not manager.is_interrupted():
 				are_all_interrupted = false
 				break
-		
+
 		if are_all_interrupted:
 			win()
 
-
 func set_player(pos, rot):
-	print("Set position to " + str(pos))
-	# Has to use this because onready vars aren't loaded yet
-	$Player.translation = pos
-	$Player.rotation_degrees.y = rot
+	player.translation = pos
+	player.rotation_degrees.y = rot
 
 
 func win():

@@ -39,6 +39,7 @@ onready var game_manager := get_node("../")
 
 
 func _ready():
+	yield(get_tree().root, "ready")
 	generate_map()
 	game_manager.set_player(player_spawn_position, player_spawn_rotation)
 	emit_signal("map_generated")
@@ -46,11 +47,8 @@ func _ready():
 
 func generate_map():
 	var map = generate_map_array()
-	print_map(map)
 	place_map(map)
-	print("Placed map")
 	place_people(map)
-	print("Placed people")
 
 func generate_map_array():
 	randomize()
