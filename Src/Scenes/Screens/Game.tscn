@@ -14,6 +14,12 @@ script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 1 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="WinScreen" type="Control" parent="CanvasLayer"]
@@ -29,9 +35,3 @@ You have successfully ruined every single conversation that was happening at thi
 align = 1
 valign = 1
 autowrap = true
-
-[node name="StaticBody" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 1 )
