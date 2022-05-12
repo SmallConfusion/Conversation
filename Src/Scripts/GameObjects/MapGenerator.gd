@@ -13,6 +13,12 @@ extends Spatial
 # Let's see if I can pull this off.
 # Update it's working so far
 
+
+export (PackedScene) var wall_scene
+export (PackedScene) var doorframe_scene
+export (PackedScene) var floor_ceiling_scene
+
+
 func _ready():
 	generate_map()
 
@@ -20,6 +26,8 @@ func _ready():
 func generate_map():
 	var map = generate_map_array()
 	print_map(map)
+	place_map(map)
+
 
 func generate_map_array():
 	randomize()
@@ -91,8 +99,89 @@ func generate_map_array():
 				facing_mulitplier = 7
 		
 		map[ypos][xpos] *= facing_mulitplier
-	
+		
 	return map
+
+
+func place_map(map):
+	for i in len(map):
+		var row = map[i]
+		
+		for j in len(row):
+			var cell = row[j]
+			
+			if cell > 1:
+				generate_room(cell, i, j)
+
+
+func generate_room(exits, x, y):
+	var room_size = 3
+	var wall_width = 2
+	
+	var base_x = x * room_size * wall_width
+	var base_y = y * room_size * wall_width
+	
+	# generate floors and ceilings
+	for i in room_size:
+		for j in room_size:
+			var xpos = wall_width * i + base_x
+			var ypos = wall_width * j + base_y
+			
+			place(floor_ceiling_scene, xpos, ypos)
+	
+	# Generate walls and doorframes around the perimeter
+	
+	# I'm almost 100% sure that the orientations of these walls are messed up in some way
+	
+	# Front, right, back, left
+	var door_sides = [exits % 2 == 0,
+					exits % 3 == 0, 
+					exits % 5 == 0, 
+					exits % 7 == 0]
+	
+	for i in room_size:
+		var to_place = wall_scene
+		
+		# Back wall
+		# These statements check if the side needs a door, and if it does, then it randomly places
+		# A doorframe at that position
+		if door_sides[2] and i == floor((room_size-1)/2):
+			to_place = doorframe_scene
+		else:
+			to_place = wall_scene 
+		
+		place(to_place, base_x + (room_size-1) * wall_width, base_y + i * wall_width)
+		
+		# Left wall
+		if door_sides[3] and i == floor((room_size-1)/2):
+			to_place = doorframe_scene
+		else:
+			to_place = wall_scene
+
+		place(to_place, base_x + i * wall_width, base_y, 90)
+
+		# Front wall
+		if door_sides[0] and i == ceil((room_size-1)/2):
+			to_place = doorframe_scene
+		else:
+			to_place = wall_scene
+		
+		place(to_place, base_x, base_y + i * wall_width, 180)
+
+		# Right wall
+		if door_sides[1] and i == ceil((room_size-1)/2):
+			to_place = doorframe_scene
+		else:
+			to_place = wall_scene
+
+		place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270)
+
+func place(to_place, x, y, r = 0):
+	var place = to_place.instance()
+	place.translation = Vector3(x, 0, y)
+	place.rotation_degrees.y = r
+	add_child(place)
+	
 
 func print_map(map):
 	for row in map:
