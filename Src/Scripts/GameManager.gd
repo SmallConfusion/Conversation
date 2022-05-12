@@ -32,6 +32,7 @@ func _process(delta):
 
 
 func set_player(pos, rot):
+	print("Set position to " + str(pos))
 	# Has to use this because onready vars aren't loaded yet
 	$Player.translation = pos
 	$Player.rotation_degrees.y = rot

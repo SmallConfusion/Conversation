@@ -27,6 +27,7 @@ func _process(delta):
 		$"SpeechBubblePivot/SpeechBubble".visible = false
 		rotate_self()
 
+
 func talk(text):
 	talk_string = text
 	talk_position = 0

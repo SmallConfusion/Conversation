@@ -41,13 +41,16 @@ onready var game_manager := get_node("../")
 func _ready():
 	generate_map()
 	game_manager.set_player(player_spawn_position, player_spawn_rotation)
+	emit_signal("map_generated")
 
 
 func generate_map():
 	var map = generate_map_array()
+	print_map(map)
 	place_map(map)
+	print("Placed map")
 	place_people(map)
-	emit_signal("map_generated")
+	print("Placed people")
 
 func generate_map_array():
 	randomize()
@@ -82,45 +85,42 @@ func generate_map_array():
 			# Give my position an exit in the direction I'm facing
 			var facing_mulitplier := 1
 			
-			match direction:
-				0:
-					facing_mulitplier = 2
-				1:
-					facing_mulitplier = 3
-				2:
-					facing_mulitplier = 5
-				3:
-					facing_mulitplier = 7
+			if direction == 0:
+				facing_mulitplier = 2
+			elif direction == 1:
+				facing_mulitplier = 3
+			elif direction == 2:
+				facing_mulitplier = 5
+			elif direction == 3:
+				facing_mulitplier = 7
 			
 			map[ypos][xpos] *= facing_mulitplier
 			
-			match direction:
-				0:
-					if ypos > 0:
-						ypos -= 1
-				1:
-					if xpos < map_size-1:
-						xpos += 1
-				2:
-					if ypos < map_size-1:
-						ypos += 1
-				3:
-					if xpos > 0:
-						xpos -= 1
+			if direction == 0:
+				if ypos > 0:
+					ypos -= 1
+			elif direction == 1:
+				if xpos < map_size-1:
+					xpos += 1
+			elif direction == 2:
+				if ypos < map_size-1:
+					ypos += 1
+			elif direction == 3:
+				if xpos > 0:
+					xpos -= 1
 			
 			
 			# Puts matching exit in room I'm currently in
 			facing_mulitplier = 1
 			
-			match direction:
-				2:
-					facing_mulitplier = 2
-				3:
-					facing_mulitplier = 3
-				0:
-					facing_mulitplier = 5
-				1:
-					facing_mulitplier = 7
+			if direction == 2:
+				facing_mulitplier = 2
+			elif direction == 3:
+				facing_mulitplier = 3
+			elif direction == 0:
+				facing_mulitplier = 5
+			elif direction == 1:
+				facing_mulitplier = 7
 			
 			map[ypos][xpos] *= facing_mulitplier
 		
