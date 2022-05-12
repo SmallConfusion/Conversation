@@ -10,6 +10,6 @@ transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 2.98981, 0 )
 [node name="OmniLight" type="OmniLight" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82752, 0 )
 shadow_enabled = true
-shadow_bias = 0.011
+shadow_bias = 0.026
 shadow_reverse_cull_face = true
-omni_range = 7.415
+omni_range = 7.5

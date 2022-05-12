@@ -15,6 +15,12 @@ extends Spatial
 
 signal map_generated
 
+export var map_size := 16
+export var map_generation_steps := 20
+
+export var room_group_ratio := 0.4
+export var room_size := 5
+
 export (PackedScene) var wall_scene
 export (PackedScene) var doorframe_scene
 export (PackedScene) var floor_ceiling_scene
@@ -26,10 +32,8 @@ export (PackedScene) var person_scene
 var player_spawn_position = null
 var player_spawn_rotation = null
 
-var room_size := 5
 var wall_width := 2.0
 
-var room_group_ratio := 0.6
 
 onready var game_manager := get_node("../")
 
@@ -45,79 +49,82 @@ func generate_map():
 	place_map(map)
 	place_people(map)
 	emit_signal("map_generated")
+	print_map(map)
 
 func generate_map_array():
-	# TODO: Will generate doors off the array
 	randomize()
 	
 	# Generates empty map
-	var size = 8
-	
 	var map = []
 	
-	for i in size:
+	for i in map_size:
 		var row = []
-		for j in size:
+		for j in map_size:
 			row.append(1)
 		map.append(row)
 	
 	# Generate map
-	var steps := 10
-	var xpos := floor(size/2)
+	var xpos := floor(map_size/2)
 	var ypos := xpos
 	
 	# 0: up, 1: right, 2: down, 3: left
 	var direction := 0
 	
 	
-	for i in steps:
+	for i in map_generation_steps:
 # warning-ignore:narrowing_conversion
 		direction = floor(rand_range(0, 4))
 		
-		# Give my position an exit in the direction I'm facing
-		var facing_mulitplier := 1
+		var can_move_in_direction = (direction == 0 and ypos > 0) or \
+									(direction == 2 and ypos < map_size - 1) or \
+									(direction == 3 and xpos > 0) or \
+									(direction == 1 and xpos < map_size - 1)
 		
-		match direction:
-			0:
-				facing_mulitplier = 2
-			1:
-				facing_mulitplier = 3
-			2:
-				facing_mulitplier = 5
-			3:
-				facing_mulitplier = 7
-		
-		map[ypos][xpos] *= facing_mulitplier
-		
-		match direction:
-			0:
-				if ypos > 0:
-					ypos -= 1
-			1:
-				if xpos < size-1:
-					xpos += 1
-			2:
-				if ypos < size-1:
-					ypos += 1
-			3:
-				if xpos > 0:
-					xpos -= 1
-		
-		
-		# Puts matching exit in room I'm currently in
-		facing_mulitplier = 1
-		
-		match direction:
-			2:
-				facing_mulitplier = 2
-			3:
-				facing_mulitplier = 3
-			0:
-				facing_mulitplier = 5
-			1:
-				facing_mulitplier = 7
-		
-		map[ypos][xpos] *= facing_mulitplier
+		if can_move_in_direction:
+			# Give my position an exit in the direction I'm facing
+			var facing_mulitplier := 1
+			
+			match direction:
+				0:
+					facing_mulitplier = 2
+				1:
+					facing_mulitplier = 3
+				2:
+					facing_mulitplier = 5
+				3:
+					facing_mulitplier = 7
+			
+			map[ypos][xpos] *= facing_mulitplier
+			
+			match direction:
+				0:
+					if ypos > 0:
+						ypos -= 1
+				1:
+					if xpos < map_size-1:
+						xpos += 1
+				2:
+					if ypos < map_size-1:
+						ypos += 1
+				3:
+					if xpos > 0:
+						xpos -= 1
+			
+			
+			# Puts matching exit in room I'm currently in
+			facing_mulitplier = 1
+			
+			match direction:
+				2:
+					facing_mulitplier = 2
+				3:
+					facing_mulitplier = 3
+				0:
+					facing_mulitplier = 5
+				1:
+					facing_mulitplier = 7
+			
+			map[ypos][xpos] *= facing_mulitplier
 		
 	return map
 
@@ -214,7 +221,7 @@ func generate_room(exits, x, y):
 
 func place_people(map):
 	var rooms := []
-	var is_first = false
+	var is_first = true
 	
 	for i in len(map):
 		var row = map[i]
@@ -223,7 +230,7 @@ func place_people(map):
 			var cell = row[j]
 			
 			if cell > 1:
-				# Player is placed in the first room.
+				# Player is placed in the first room
 				if is_first:
 					is_first = false
 				else:
