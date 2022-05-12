@@ -214,6 +214,7 @@ func generate_room(exits, x, y):
 
 func place_people(map):
 	var rooms := []
+	var is_first = false
 	
 	for i in len(map):
 		var row = map[i]
@@ -222,7 +223,11 @@ func place_people(map):
 			var cell = row[j]
 			
 			if cell > 1:
-				rooms.append([i, j])
+				# Player is placed in the first room.
+				if is_first:
+					is_first = false
+				else:
+					rooms.append([i, j])
 	
 	var num_groups := len(rooms) * room_group_ratio
 	
