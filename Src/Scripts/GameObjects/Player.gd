@@ -14,10 +14,6 @@ onready var conversation_area := get_node("ConversationArea")
 onready var interrupt_hint := get_node("CanvasLayer/Control/InterruptHint")
 
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
 func _process(delta):
 	Debug.player_position = translation
 	
@@ -81,7 +77,7 @@ func _input(event):
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera_pivot.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, -1.2, 1.2)
-	elif event is InputEventMouseButton and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+	elif event is InputEventMouseButton and not locked:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -97,4 +93,14 @@ func get_input():
 		input_dir += global_transform.basis.x
 	input_dir = input_dir.normalized()
 	return input_dir
+
+
+func lock():
+	locked = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func unlock():
+	locked = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
