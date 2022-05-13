@@ -137,6 +137,8 @@ func place_map(map):
 
 
 func generate_room(exits, x, y):
+	var wall_color_hue := randf()
+	
 	var base_x = x * room_size * wall_width
 	var base_y = y * room_size * wall_width
 	
@@ -178,6 +180,7 @@ func generate_room(exits, x, y):
 	
 	for i in room_size:
 		var to_place = wall_scene
+		var walls = []
 		
 		# Back wall
 		# These statements check if the side needs a door, and if it does, then it randomly places
@@ -188,7 +191,7 @@ func generate_room(exits, x, y):
 		else:
 			to_place = wall_scene 
 		
-		place(to_place, base_x + (room_size-1) * wall_width, base_y + i * wall_width)
+		walls.append(place(to_place, base_x + (room_size-1) * wall_width, base_y + i * wall_width))
 		
 		# Left wall
 		if door_sides[3] and i == floor((room_size-1)/2):
@@ -196,7 +199,7 @@ func generate_room(exits, x, y):
 		else:
 			to_place = wall_scene
 
-		place(to_place, base_x + i * wall_width, base_y, 90)
+		walls.append(place(to_place, base_x + i * wall_width, base_y, 90))
 
 		# Front wall
 		if door_sides[0] and i == ceil((room_size-1)/2):
@@ -204,7 +207,7 @@ func generate_room(exits, x, y):
 		else:
 			to_place = wall_scene
 		
-		place(to_place, base_x, base_y + i * wall_width, 180)
+		walls.append(place(to_place, base_x, base_y + i * wall_width, 180))
 
 		# Right wall
 		if door_sides[1] and i == ceil((room_size-1)/2):
@@ -212,8 +215,17 @@ func generate_room(exits, x, y):
 		else:
 			to_place = wall_scene
 
-		place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270)
-
+		walls.append(place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270))
+		
+		
+		# Color walls
+		for wall in walls:
+			var mesh = wall.get_node("RootNode").get_children()[0]
+			
+			if mesh:
+				var material = mesh.mesh.get("surface_2/material").duplicate()
+				material.albedo_color.h = wall_color_hue
+				mesh.set("material/1", material)
 
 func place_people(map):
 	var rooms := []
