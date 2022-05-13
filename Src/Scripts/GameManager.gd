@@ -15,6 +15,9 @@ func _ready():
 	map_generator.connect("map_generated", self, "map_generated")
 
 func map_generated():
+	SceneManager.fade()
+	yield(SceneManager, "fade_half")
+	
 	for child in map_generator.get_children():
 		if child.is_in_group("ConversationArea"):
 			conversation_managers.append(child)

@@ -1,4 +1,4 @@
 extends Button
 
 func _pressed():
-	get_tree().change_scene("res://Scenes/Screens/Game.tscn")
+	SceneManager.fade_to("res://Scenes/Screens/Game.tscn")
