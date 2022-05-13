@@ -45,13 +45,29 @@ func _physics_process(delta):
 	# Move
 	velocity.x *= friction
 	velocity.z *= friction
-	velocity.y += gravity * delta
 	
-	var desired_velocity = get_input() * speed
+	if Debug.noclip:
+		velocity.y *= friction
+	else:
+		velocity.y += gravity * delta
+	
+	var desired_velocity = get_input() * (Debug.speed if Debug.speed else speed)
 	
 	velocity.x = desired_velocity.x
 	velocity.z = desired_velocity.z
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+
+	if Debug.noclip:
+		velocity.y = 0
+		
+		if Input.is_action_pressed("Up"):
+			velocity.y += Debug.speed if Debug.speed else speed
+		
+		if Input.is_action_pressed("Down"):
+			velocity.y -= Debug.speed if Debug.speed else speed
+		
+		translation += velocity * delta
+	else:
+		velocity = move_and_slide(velocity, Vector3.UP, true)
 
 
 func _input(event):
