@@ -13,6 +13,9 @@ extents = Vector3( 0.01, 0.3, 0.785732 )
 [node name="RootNode" parent="." index="0"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, 0 )
 
+[node name="WallDoor" parent="RootNode" index="0"]
+transform = Transform( -100, 0, -8.74228e-06, 0, 100, 0, 8.74228e-06, 0, -100, 0, 0, 0 )
+
 [node name="StaticBody" type="StaticBody" parent="." index="1"]
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
