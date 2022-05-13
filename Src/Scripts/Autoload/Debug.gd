@@ -4,6 +4,8 @@ onready var debug_label := get_node("Control/Label")
 var noclip = false
 var speed = null
 
+var player_position = null
+
 func _ready():
 	Console.add_command("toggle_debug", self, "toggle_debug") \
 		.set_description("Toggles debug screen.") \
@@ -25,8 +27,8 @@ func _ready():
 
 func _process(delta):
 	debug_label.text = \
-		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n"
-
+		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n" + \
+		"Player position: " + str(player_position)
 
 func toggle_debug():
 	debug_label.visible = not debug_label.visible

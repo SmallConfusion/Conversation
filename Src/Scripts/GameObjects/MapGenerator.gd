@@ -34,12 +34,11 @@ var player_spawn_rotation = null
 
 var wall_width := 2.0
 
-
 onready var game_manager := get_node("../")
 
 
 func _ready():
-	yield(get_tree().root, "ready")
+	yield(get_tree().create_timer(0.1), "timeout")
 	generate_map()
 	game_manager.set_player(player_spawn_position, player_spawn_rotation)
 	emit_signal("map_generated")

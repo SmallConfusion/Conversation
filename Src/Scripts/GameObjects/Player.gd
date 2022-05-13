@@ -17,6 +17,8 @@ func _ready():
 
 
 func _process(delta):
+	Debug.player_position = translation
+	
 	# Get interruptable conversations
 	var interruptable_conversations := []
 	
