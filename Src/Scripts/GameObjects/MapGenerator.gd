@@ -185,6 +185,7 @@ func generate_room(exits, x, y):
 		# Back wall
 		# These statements check if the side needs a door, and if it does, then it randomly places
 		# A doorframe at that position
+		# Update: random placement too hard, places center instead
 		if door_sides[2] and i == floor((room_size-1)/2):
 			to_place = doorframe_scene
 			
