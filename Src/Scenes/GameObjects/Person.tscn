@@ -115,7 +115,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="SpeechBubblePivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85996, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76355, 0 )
 
 [node name="SpeechBubble" type="Sprite3D" parent="SpeechBubblePivot"]
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0, 1.737, -1.55 )
