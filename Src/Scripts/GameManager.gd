@@ -7,8 +7,11 @@ var started := false
 onready var win_screen := get_node("CanvasLayer/WinScreen")
 onready var player := get_node("Player")
 onready var map_generator := get_node("MapGenerator")
+onready var loading_screen := get_node("CanvasLayer/LoadingScreen")
 
 func _ready():
+	loading_screen.visible = true
+	player.locked = true
 	map_generator.connect("map_generated", self, "map_generated")
 
 func map_generated():
@@ -16,6 +19,8 @@ func map_generated():
 		if child.is_in_group("ConversationArea"):
 			conversation_managers.append(child)
 	
+	loading_screen.visible = false
+	player.locked = false
 	started = true
 
 func _process(delta):

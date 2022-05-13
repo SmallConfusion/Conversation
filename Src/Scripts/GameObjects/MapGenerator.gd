@@ -36,9 +36,13 @@ var wall_width := 2.0
 
 onready var game_manager := get_node("../")
 
-
 func _ready():
-	yield(get_tree().create_timer(0.1), "timeout")
+	var generation_thread := Thread.new()
+	generation_thread.start(self, "create_world")
+	yield(self, "map_generated")
+	generation_thread.wait_to_finish()
+
+func create_world():
 	generate_map()
 	game_manager.set_player(player_spawn_position, player_spawn_rotation)
 	emit_signal("map_generated")
@@ -280,7 +284,7 @@ func place_people(map):
 			
 			conversation_manager.add_child(person)
 		
-		add_child(conversation_manager)
+		call_deferred("add_child", conversation_manager)
 
 func get_room_center(x, y):
 	return [x * room_size * wall_width + room_size / 2 * wall_width,
@@ -291,7 +295,7 @@ func place(to_place, x, y, r = 0):
 	var place = to_place.instance()
 	place.translation = Vector3(x, 0, y)
 	place.rotation_degrees.y = r
-	add_child(place)
+	call_deferred("add_child", place)
 	return place
 
 
