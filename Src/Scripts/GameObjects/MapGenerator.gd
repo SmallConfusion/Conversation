@@ -12,11 +12,14 @@ extends Spatial
 
 # Let's see if I can pull this off.
 # Update it's working so far
+# It works
 
 signal map_generated
 
-export var map_size := 16
-export var map_generation_steps := 20
+export var map_size := 32
+export var number_of_rooms := 24
+
+export var max_steps_before_reset := 14
 
 export var room_group_ratio := 0.4
 export var room_size := 5
@@ -75,8 +78,17 @@ func generate_map_array():
 	# 0: up, 1: right, 2: down, 3: left
 	var direction := 0
 	
+	var steps := 0
 	
-	for i in map_generation_steps:
+	while count_rooms(map) < number_of_rooms:
+		steps += 1
+		
+		if steps > max_steps_before_reset:
+			steps = 0
+			var new_pos = get_random_room_pos(map)
+			xpos = new_pos[0]
+			ypos = new_pos[1]
+		
 # warning-ignore:narrowing_conversion
 		direction = floor(rand_range(0, 4))
 		
@@ -130,6 +142,31 @@ func generate_map_array():
 		
 	return map
 
+
+func count_rooms(map):
+	var rooms = 0
+	
+	for row in map:
+		for cell in row:
+			if cell > 1:
+				rooms += 1
+	
+	return rooms
+
+
+func get_random_room_pos(map):
+	var rooms = []
+	
+	for i in len(map):
+		var row = map[i]
+		
+		for j in len(row):
+			var cell = row[j]
+			
+			if cell > 1:
+				rooms.append([i, j])
+	
+	return rooms[randi() % len(rooms)]
 
 func place_map(map):
 	for i in len(map):
