@@ -16,7 +16,7 @@ extends Spatial
 
 signal map_generated
 
-export var map_size := 32
+export var map_size := 64
 export var number_of_rooms := 24
 
 export var room_group_ratio := 0.4
@@ -39,6 +39,9 @@ onready var game_manager := get_node("../")
 
 
 func _ready():
+	if Global:
+		number_of_rooms = Global.number_of_rooms
+	
 	var generation_thread := Thread.new()
 	generation_thread.start(self, "create_world")
 	yield(self, "map_generated")

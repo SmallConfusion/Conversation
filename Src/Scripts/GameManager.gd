@@ -48,4 +48,6 @@ func set_player(pos, rot):
 
 
 func win():
-	win_screen.visible = true
+	Global.number_of_rooms = floor((Global.number_of_rooms + 2) * 1.2)
+	FadeManager.fade()
+	get_tree().reload_current_scene()
