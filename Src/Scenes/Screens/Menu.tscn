@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Buttons/PlayButton.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Buttons/Settings.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Buttons/QuitButton.gd" type="Script" id=3]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -15,14 +16,14 @@ anchor_bottom = 1.0
 
 [node name="Spacer" type="Control" parent="Control/VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 107.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 111.0
+margin_top = 78.0
 margin_right = 1024.0
-margin_bottom = 183.0
+margin_bottom = 150.0
 
 [node name="Spacer2" type="Control" parent="Control/VBoxContainer/HBoxContainer"]
 margin_right = 318.0
@@ -47,16 +48,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Spacer2" type="Control" parent="Control/VBoxContainer"]
-margin_top = 187.0
+margin_top = 154.0
 margin_right = 1024.0
-margin_bottom = 294.0
+margin_bottom = 229.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 298.0
+margin_top = 233.0
 margin_right = 1024.0
-margin_bottom = 376.0
+margin_bottom = 311.0
 
 [node name="Spacer" type="Control" parent="Control/VBoxContainer/HBoxContainer2"]
 margin_right = 338.0
@@ -81,17 +82,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Spacer3" type="Control" parent="Control/VBoxContainer"]
-margin_top = 380.0
+margin_top = 315.0
 margin_right = 1024.0
-margin_bottom = 406.0
+margin_bottom = 334.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 410.0
+margin_top = 338.0
 margin_right = 1024.0
-margin_bottom = 488.0
+margin_bottom = 416.0
 
 [node name="Spacer" type="Control" parent="Control/VBoxContainer/HBoxContainer3"]
 margin_right = 338.0
@@ -116,8 +117,43 @@ margin_bottom = 78.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Spacer5" type="Control" parent="Control/VBoxContainer"]
+margin_top = 420.0
+margin_right = 1024.0
+margin_bottom = 439.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 443.0
+margin_right = 1024.0
+margin_bottom = 521.0
+
+[node name="Spacer" type="Control" parent="Control/VBoxContainer/HBoxContainer4"]
+margin_right = 338.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer/HBoxContainer4"]
+margin_left = 342.0
+margin_right = 681.0
+margin_bottom = 78.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Quit"
+script = ExtResource( 3 )
+
+[node name="Spacer2" type="Control" parent="Control/VBoxContainer/HBoxContainer4"]
+margin_left = 685.0
+margin_right = 1024.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="Spacer4" type="Control" parent="Control/VBoxContainer"]
-margin_top = 492.0
+margin_top = 525.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
