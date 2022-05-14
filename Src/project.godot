@@ -18,7 +18,6 @@ config/icon="res://icon.png"
 
 Conversations="*res://Scripts/Autoload/Conversations.gd"
 Global="*res://Scripts/Autoload/Global.gd"
-Console="*res://addons/quentincaffeino/console/src/Console.tscn"
 Debug="*res://Scenes/Autoload/Debug.tscn"
 FadeManager="*res://Scenes/Autoload/FadeManager.tscn"
 
@@ -28,7 +27,7 @@ window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/quentincaffeino/console/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gui]
 

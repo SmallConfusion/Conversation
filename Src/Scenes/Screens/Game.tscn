@@ -37,15 +37,18 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="LoadingScreen" type="Control" parent="CanvasLayer"]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="LoadingScreen" type="Control" parent="CanvasLayer2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadingScreen"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/LoadingScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="CanvasLayer/LoadingScreen"]
+[node name="Label" type="Label" parent="CanvasLayer2/LoadingScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Loading..."

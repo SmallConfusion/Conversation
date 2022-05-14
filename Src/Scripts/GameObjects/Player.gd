@@ -9,15 +9,25 @@ var velocity = Vector3()
 
 var locked = false
 
+var health_decrease_speed := 0.006
+var health := 1.0
+
 onready var camera_pivot := get_node("Pivot")
 onready var conversation_area := get_node("ConversationArea")
 onready var interrupt_hint := get_node("CanvasLayer/Control/InterruptHint")
 onready var pause_menu := get_node("PauseMenu")
+onready var battery := get_node("CanvasLayer/Control/Battery")
 
 func _process(delta):
 	Debug.player_position = translation
 	
 	if not locked:
+		health -= health_decrease_speed * delta
+		battery.get_material().set_shader_param("amount", health)
+		
+		if health <= 0:
+			die()
+		
 		# Get interruptable conversations
 		var interruptable_conversations := []
 		
@@ -93,6 +103,12 @@ func get_input():
 		input_dir += global_transform.basis.x
 	input_dir = input_dir.normalized()
 	return input_dir
+
+
+func die():
+	FadeManager.fade()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene("res://Scenes/Screens/Menu.tscn")
 
 
 func lock():

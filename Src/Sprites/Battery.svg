@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 52.916665 52.916668"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="Battery.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#bababa"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="false"
+     inkscape:document-units="mm"
+     showgrid="true"
+     units="px"
+     width="20px"
+     inkscape:zoom="4"
+     inkscape:cx="77"
+     inkscape:cy="87.25"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect848"
+       style="fill:#fefefe;fill-opacity:1;stroke:#000000;stroke-width:1.14499;stroke-linecap:round;stroke-opacity:1"
+       d="m 4.159405,16.497549 c -1.4420599,0 -2.6030332,1.160973 -2.6030332,2.603033 v 14.715504 c 0,1.442057 1.1609733,2.603031 2.6030332,2.603031 h 40.862563 c 1.442058,0 2.603032,-1.160974 2.603032,-2.603031 v -2.377361 h 2.490196 c 0.689784,0 1.245098,-0.555313 1.245098,-1.245098 v -7.470588 c 0,-0.689785 -0.555314,-1.245098 -1.245098,-1.245098 H 47.625 v -2.377359 c 0,-1.44206 -1.160974,-2.603033 -2.603032,-2.603033 z" />
+  </g>
+</svg>

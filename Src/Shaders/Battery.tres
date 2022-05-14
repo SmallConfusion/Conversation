@@ -1,0 +1,32 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float amount = 1.0;
+uniform sampler2D color_gradient;
+
+uniform vec3 background_color = vec3(0.2);
+uniform vec3 border_color = vec3(0.0);
+
+uniform float min_x = 0.04;
+uniform float max_x = 0.96;
+
+float map(float x, float a, float b, float c, float d) {
+	return (x-a) / (b-a) * (d-c) + c;
+}
+
+void fragment() {
+	float x_value = map(amount, 0, 1, min_x, max_x);
+	
+	vec4 new_color;
+	new_color.a = texture(TEXTURE, UV).a;
+	
+	vec4 gradient_color = texture(color_gradient, vec2(amount, 0));
+	float mix_value = max(sign(x_value - UV.x), 0);
+	
+	new_color.rgb = mix(background_color, gradient_color.rgb, mix_value);
+	new_color.rgb = mix(border_color, new_color.rgb, texture(TEXTURE, UV).r);
+	
+	COLOR = new_color;
+}"
