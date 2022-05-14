@@ -32,7 +32,7 @@ enabled=PoolStringArray( "res://addons/quentincaffeino/console/plugin.cfg" )
 
 [gui]
 
-theme/custom="res://default_theme.tres"
+theme/custom="res://Themes/DefaultTheme.tres"
 theme/custom_font="res://Fonts/LiberationSansUI.tres"
 
 [input]
@@ -111,4 +111,5 @@ common/enable_pause_aware_picking=true
 
 quality/directional_shadow/size=2048
 quality/shadow_atlas/size=2048
+environment/default_clear_color=Color( 0.980392, 0.980392, 0.980392, 1 )
 environment/default_environment="res://default_env.tres"
