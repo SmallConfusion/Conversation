@@ -20,7 +20,7 @@ Conversations="*res://Scripts/Autoload/Conversations.gd"
 Global="*res://Scripts/Autoload/Global.gd"
 Console="*res://addons/quentincaffeino/console/src/Console.tscn"
 Debug="*res://Scenes/Autoload/Debug.tscn"
-SceneManager="*res://Scenes/Autoload/SceneManager.tscn"
+FadeManager="*res://Scenes/Autoload/FadeManager.tscn"
 
 [display]
 
