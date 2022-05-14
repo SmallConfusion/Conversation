@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Autoload/Debug.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/LiberationSansDebug.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Themes/DefaultTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Fonts/LiberationSansUISmall.tres" type="DynamicFont" id=4]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 5
@@ -16,10 +16,12 @@ theme = ExtResource( 3 )
 
 [node name="Debug" type="Label" parent="Control"]
 visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -72.0
 margin_right = 120.0
-margin_bottom = 72.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+valign = 2
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
@@ -33,6 +35,16 @@ anchor_right = 1.0
 margin_right = -0.199951
 margin_bottom = 65.0
 text = "Debug Menu"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+margin_top = 37.0
+margin_right = -0.199951
+margin_bottom = 75.0
+custom_fonts/font = ExtResource( 4 )
+text = "Press ctrl to toggle"
 align = 1
 valign = 1
 

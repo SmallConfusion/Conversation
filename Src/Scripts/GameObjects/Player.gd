@@ -11,7 +11,7 @@ var velocity = Vector3()
 
 var locked = false
 
-var health_decrease_speed := 0.009
+var health_decrease_speed := 0.02
 var health := 1.0
 
 onready var camera_pivot := get_node("Pivot")

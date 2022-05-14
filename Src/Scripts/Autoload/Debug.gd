@@ -31,6 +31,7 @@ func _input(e):
 				if cheat_code_pos == len(cheat_code):
 					debug_mode = true
 					debug_menu.visible = true
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				
 			elif e.scancode == cheat_code[0]:
 				cheat_code_pos = 1
