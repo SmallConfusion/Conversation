@@ -3,14 +3,18 @@ extends Spatial
 var conversation_managers := []
 
 var started := false
+var already_won := false
 
 onready var win_screen := get_node("CanvasLayer/WinScreen")
 onready var player := get_node("Player")
 onready var map_generator := get_node("MapGenerator")
 onready var loading_screen := get_node("CanvasLayer2/LoadingScreen")
+onready var end_screen := get_node("EndScreen/Control")
+onready var remaining_info := get_node("Info/Control/Label")
 
 
 func _ready():
+	player.connect("die", self, "lose")
 	loading_screen.visible = true
 	player.lock()
 	map_generator.connect("map_generated", self, "map_generated")
@@ -31,14 +35,16 @@ func map_generated():
 
 func _process(delta):
 	if started:
-		var are_all_interrupted := true
+		var remaining := 0
 		
 		for manager in conversation_managers:
 			if not manager.is_interrupted():
-				are_all_interrupted = false
-				break
-
-		if are_all_interrupted:
+				remaining += 1
+		
+		remaining_info.text = "Remaining conversations: " + str(remaining)
+		
+		if remaining <= 0 and not already_won:
+			yield(get_tree(), "idle_frame")
 			win()
 
 
@@ -48,6 +54,17 @@ func set_player(pos, rot):
 
 
 func win():
-	Global.number_of_rooms = floor((Global.number_of_rooms + 2) * 1.2)
-	FadeManager.fade()
-	get_tree().reload_current_scene()
+	already_won = true
+	Global.number_of_rooms = floor((Global.number_of_rooms + 1) * 1.15)
+	Global.level += 1
+	end_screen.win()
+	player.lock()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func lose():
+	Global.reset_level()
+	end_screen.lose()
+	player.lock()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	

@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal die
+
 var gravity := -30.0
 var friction := 0.9
 var speed := 5.0
@@ -9,7 +11,7 @@ var velocity = Vector3()
 
 var locked = false
 
-var health_decrease_speed := 0.006
+var health_decrease_speed := 0.009
 var health := 1.0
 
 onready var camera_pivot := get_node("Pivot")
@@ -20,10 +22,10 @@ onready var battery := get_node("CanvasLayer/Control/Battery")
 
 func _process(delta):
 	Debug.player_position = translation
+	battery.get_material().set_shader_param("amount", health)
 	
 	if not locked:
 		health -= health_decrease_speed * delta
-		battery.get_material().set_shader_param("amount", health)
 		
 		if health <= 0:
 			die()
@@ -106,9 +108,7 @@ func get_input():
 
 
 func die():
-	FadeManager.fade()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().change_scene("res://Scenes/Screens/Menu.tscn")
+	emit_signal("die")
 
 
 func lock():
