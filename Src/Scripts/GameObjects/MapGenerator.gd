@@ -36,11 +36,13 @@ var wall_width := 2.0
 
 onready var game_manager := get_node("../")
 
+
 func _ready():
 	var generation_thread := Thread.new()
 	generation_thread.start(self, "create_world")
 	yield(self, "map_generated")
 	generation_thread.wait_to_finish()
+
 
 func create_world():
 	generate_map()
@@ -52,6 +54,7 @@ func generate_map():
 	var map = generate_map_array()
 	place_map(map)
 	place_people(map)
+
 
 func generate_map_array():
 	randomize()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/GameObjects/Player.gd" type="Script" id=1]
 [ext_resource path="res://CameraEnvironment.tres" type="Environment" id=2]
+[ext_resource path="res://Scenes/PauseMenu.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -39,16 +40,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="ConversationArea"]
 shape = SubResource( 3 )
 
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="InterruptHint" type="Control" parent="CanvasLayer/Control"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/InterruptHint"]
 anchor_top = 1.0
@@ -61,3 +66,6 @@ margin_bottom = 8.0
 text = "Press space to interrupt"
 align = 1
 valign = 1
+
+[connection signal="pause" from="PauseMenu" to="." method="_on_pause"]
+[connection signal="resume" from="PauseMenu" to="." method="_on_resume"]

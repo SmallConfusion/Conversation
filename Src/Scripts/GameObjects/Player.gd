@@ -12,7 +12,7 @@ var locked = false
 onready var camera_pivot := get_node("Pivot")
 onready var conversation_area := get_node("ConversationArea")
 onready var interrupt_hint := get_node("CanvasLayer/Control/InterruptHint")
-
+onready var pause_menu := get_node("PauseMenu")
 
 func _process(delta):
 	Debug.player_position = translation
@@ -97,10 +97,19 @@ func get_input():
 
 func lock():
 	locked = true
+	pause_menu.can_pause = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func unlock():
 	locked = false
+	pause_menu.can_pause = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
+func _on_pause():
+	lock()
+
+
+func _on_resume():
+	unlock()
