@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/GameObjects/MapGenerator.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/MapParts/Wall.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/MapParts/FloorCeiling.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/MapParts/DoorWall.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/MapParts/CeilingLight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/MapParts/Parts/Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/MapParts/Parts/FloorCeiling.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/MapParts/Parts/DoorWall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/MapParts/Parts/CeilingLight.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/GameObjects/ConversationManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/GameObjects/Person.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/MapParts/WaterCooler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/MapParts/Decorations/WaterCooler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/MapParts/Decorations/Chair.tscn" type="PackedScene" id=9]
 
 [node name="MapGenerator" type="Spatial"]
 script = ExtResource( 1 )
@@ -15,7 +16,7 @@ wall_scene = ExtResource( 2 )
 doorframe_scene = ExtResource( 4 )
 floor_ceiling_scene = ExtResource( 3 )
 ceiling_light_scene = ExtResource( 5 )
-floor_decorations = [ ExtResource( 8 ) ]
-floor_decoration_spawn_chance = [ 0.2 ]
+floor_decorations = [ ExtResource( 8 ), ExtResource( 9 ) ]
+floor_decoration_spawn_chance = [ 0.2, 0.4 ]
 conversation_manager_scene = ExtResource( 6 )
 person_scene = ExtResource( 7 )
