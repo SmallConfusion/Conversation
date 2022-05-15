@@ -12,7 +12,8 @@ config_version=4
 
 config/name="Add to Conversation"
 run/main_scene="res://Scenes/Screens/Menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://Icons/PersonHead.png"
+config/windows_native_icon="res://Icons/PersonHead.ico"
 
 [autoload]
 
