@@ -244,7 +244,7 @@ func generate_room(exits, x, y):
 			decoratable = false
 		else:
 			to_place = wall_scene
-			decoratable = i != 0
+			decoratable = i != room_size-1
 		
 		walls.append(place(to_place, base_x, base_y + i * wall_width, 180))
 		
@@ -257,7 +257,7 @@ func generate_room(exits, x, y):
 			decoratable = false
 		else:
 			to_place = wall_scene
-			decoratable = i != 0
+			decoratable = i != room_size-1
 
 		walls.append(place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270))
 		
