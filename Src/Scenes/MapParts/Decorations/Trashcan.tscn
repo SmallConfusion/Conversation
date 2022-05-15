@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Models/HouseDecorations/Trashcan/Trashcan.glb" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.405849, 0.793359, 0.554118 )
+
+[node name="Trashcan" type="Spatial"]
+
+[node name="Trashcan" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.286079, 0, -0.0903266, 0, 0.3, 0, 0.0903266, 0, 0.286079, 0.628181, 0, 0 )
+
+[node name="Plane" parent="Trashcan" index="10"]
+transform = Transform( 0.52, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, 1.19534, 0.00846601 )
+
+[node name="StaticBody" type="StaticBody" parent="Trashcan"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Trashcan/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82971, 0 )
+shape = SubResource( 1 )
+
+[editable path="Trashcan"]
