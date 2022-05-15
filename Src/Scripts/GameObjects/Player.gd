@@ -25,7 +25,8 @@ func _process(delta):
 	battery.get_material().set_shader_param("amount", health)
 	
 	if not locked:
-		health -= health_decrease_speed * delta
+		if not Debug.infinite_battery:
+			health -= health_decrease_speed * delta
 		
 		if health <= 0:
 			die()

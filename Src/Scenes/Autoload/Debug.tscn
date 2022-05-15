@@ -69,6 +69,17 @@ margin_right = 150.0
 margin_bottom = 40.0
 text = "Noclip"
 
+[node name="LoseHealth" type="CheckButton" parent="Control/Panel"]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -150.0
+margin_top = 178.0
+margin_right = 150.0
+margin_bottom = 218.0
+text = "InfiniteHealth"
+
 [node name="Speed" type="LineEdit" parent="Control/Panel"]
 anchor_left = 0.5
 anchor_top = 0.2
@@ -94,4 +105,5 @@ valign = 1
 
 [connection signal="toggled" from="Control/Panel/DebugInfo" to="." method="_on_DebugInfo_toggled"]
 [connection signal="toggled" from="Control/Panel/Noclip" to="." method="_on_Noclip_toggled"]
+[connection signal="toggled" from="Control/Panel/LoseHealth" to="." method="_on_LoseHealth_toggled"]
 [connection signal="text_changed" from="Control/Panel/Speed" to="." method="_on_Speed_text_changed"]

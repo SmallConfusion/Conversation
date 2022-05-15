@@ -7,6 +7,7 @@ var debug_mode := false
 
 var noclip = false
 var speed = null
+var infinite_battery = false
 
 var player_position = null
 
@@ -56,3 +57,7 @@ func _on_Noclip_toggled(button_pressed):
 func _on_Speed_text_changed(new_text):
 	# Null is a valid value for this
 	speed = float(new_text)
+
+
+func _on_LoseHealth_toggled(button_pressed):
+	infinite_battery = button_pressed
