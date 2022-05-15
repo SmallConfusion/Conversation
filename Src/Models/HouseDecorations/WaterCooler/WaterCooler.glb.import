@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/CeilingLight.glb-5fde2c653720e15fae5e4937138dabaf.scn"
+path="res://.import/WaterCooler.glb-bde92d8d8885aef109ec386436dab1bd.scn"
 
 [deps]
 
-source_file="res://Models/HouseDecorations/CeilingLight.glb"
-dest_files=[ "res://.import/CeilingLight.glb-5fde2c653720e15fae5e4937138dabaf.scn" ]
+source_file="res://Models/HouseDecorations/WaterCooler/WaterCooler.glb"
+dest_files=[ "res://.import/WaterCooler.glb-bde92d8d8885aef109ec386436dab1bd.scn" ]
 
 [params]
 

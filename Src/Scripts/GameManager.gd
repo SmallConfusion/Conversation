@@ -5,7 +5,6 @@ var conversation_managers := []
 var started := false
 var already_won := false
 
-onready var win_screen := get_node("CanvasLayer/WinScreen")
 onready var player := get_node("Player")
 onready var map_generator := get_node("MapGenerator")
 onready var loading_screen := get_node("CanvasLayer2/LoadingScreen")

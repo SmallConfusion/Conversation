@@ -27,6 +27,9 @@ export (PackedScene) var doorframe_scene
 export (PackedScene) var floor_ceiling_scene
 export (PackedScene) var ceiling_light_scene
 
+export (Array, PackedScene) var floor_decorations
+export (Array, float) var floor_decoration_spawn_chance
+
 export (PackedScene) var conversation_manager_scene
 export (PackedScene) var person_scene
 
@@ -34,6 +37,8 @@ var player_spawn_position = null
 var player_spawn_rotation = null
 
 var wall_width := 2.0
+
+var decoratable_positions := []
 
 onready var game_manager := get_node("../")
 
@@ -58,6 +63,7 @@ func generate_map():
 	var map = generate_map_array()
 	place_map(map)
 	place_people(map)
+	place_decorations()
 
 
 func generate_map_array():
@@ -200,6 +206,7 @@ func generate_room(exits, x, y):
 	
 	for i in room_size:
 		var to_place = wall_scene
+		var decoratable = false
 		var walls = []
 		
 		# Back wall
@@ -208,36 +215,54 @@ func generate_room(exits, x, y):
 		# Update: random placement too hard, places center instead
 		if door_sides[2] and i == floor((room_size-1)/2):
 			to_place = doorframe_scene
-			
+			decoratable = false
 		else:
 			to_place = wall_scene 
+			decoratable = i != 0
 		
 		walls.append(place(to_place, base_x + (room_size-1) * wall_width, base_y + i * wall_width))
+		
+		if decoratable:
+			decoratable_positions.append([base_x + (room_size-1) * wall_width, base_y + i * wall_width, 0])
 		
 		# Left wall
 		if door_sides[3] and i == floor((room_size-1)/2):
 			to_place = doorframe_scene
+			decoratable = false
 		else:
 			to_place = wall_scene
+			decoratable = i != 0
 
 		walls.append(place(to_place, base_x + i * wall_width, base_y, 90))
+		
+		if decoratable:
+			decoratable_positions.append([base_x + i * wall_width, base_y, 90])
 
 		# Front wall
 		if door_sides[0] and i == ceil((room_size-1)/2):
 			to_place = doorframe_scene
+			decoratable = false
 		else:
 			to_place = wall_scene
+			decoratable = i != 0
 		
 		walls.append(place(to_place, base_x, base_y + i * wall_width, 180))
+		
+		if decoratable:
+			decoratable_positions.append([base_x, base_y + i * wall_width, 180])
 
 		# Right wall
 		if door_sides[1] and i == ceil((room_size-1)/2):
 			to_place = doorframe_scene
+			decoratable = false
 		else:
 			to_place = wall_scene
+			decoratable = i != 0
 
 		walls.append(place(to_place, base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270))
 		
+		if decoratable:
+			decoratable_positions.append([base_x + i * wall_width, base_y + (room_size-1) * wall_width, 270])
 		
 		# Color walls
 		for wall in walls:
@@ -247,6 +272,7 @@ func generate_room(exits, x, y):
 				var material = mesh.mesh.get("surface_2/material").duplicate()
 				material.albedo_color.h = wall_color_hue
 				mesh.set("material/1", material)
+
 
 func place_people(map):
 	var rooms := []
@@ -302,6 +328,21 @@ func place_people(map):
 			conversation_manager.add_child(person)
 		
 		call_deferred("add_child", conversation_manager)
+
+
+func place_decorations():
+	for i in len(floor_decorations):
+		var decoration = floor_decorations[i]
+		var number_to_spawn = floor_decoration_spawn_chance[i] * number_of_rooms
+		
+		for j in number_to_spawn:
+			var index = randi() % len(decoratable_positions)
+			var position = decoratable_positions[index]
+			
+			decoratable_positions.remove(index)
+			
+			place(decoration, position[0], position[1], position[2])
+
 
 func get_room_center(x, y):
 	return [x * room_size * wall_width + room_size / 2 * wall_width,
