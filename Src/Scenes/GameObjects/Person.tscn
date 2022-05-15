@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/GameObjects/Person.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/GameObjects/SpeechBubble.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Other/Person/Person.glb" type="PackedScene" id=3]
+[ext_resource path="res://Models/Other/Person/Person.tres" type="Material" id=4]
 
 [sub_resource type="CapsuleShape" id=11]
 radius = 0.311665
@@ -116,3 +117,8 @@ anims/FadeOutBubble = SubResource( 3 )
 
 [node name="Person" parent="." instance=ExtResource( 3 )]
 transform = Transform( -7.43094e-09, 0, -0.17, 0, 0.17, 0, 0.17, 0, -7.43094e-09, 0, 0, 0 )
+
+[node name="Cube" parent="Person" index="0"]
+material/0 = ExtResource( 4 )
+
+[editable path="Person"]
