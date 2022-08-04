@@ -195,6 +195,15 @@ func _ready():
 			"It is Wednesday my dudes.",
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		])
+	elif day_of_week == "Friday":
+		conversations.append([
+			"It's Friday, Friday",
+			"Gotta get down on Friday",
+			"Everybody's lookin' forward to the weekend, weekend",
+			"Friday, Friday",
+			"Gettin' down on Friday",
+			"Everybody's lookin' forward to the weekend"
+		])
 	else:
 		conversations.append([
 			"Hey, what day is it?",
